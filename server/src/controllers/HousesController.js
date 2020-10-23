@@ -1,4 +1,4 @@
-const {Controller} = require('./controler');
+const {Controller} = require('./Controller');
 
 const handlers = {
     get:[
