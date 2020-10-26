@@ -3,35 +3,59 @@ class Repository {
         this.model = model;
     }
 
-    getAll(){
-        return this.model.findAll()
-            .then(result => result)
-            .catch(error => [])
+    async getAll() {
+        try {
+            const result = await this.model.findAll();
+            return result;
+        }
+        catch(err) {
+            console.error(err);
+            return [];
+        }
     }
 
-    getOneById(id){
-        return this.model.findAll({where:{id}})
-                    .then(result => {
-                        if(result.length <= 0)
-                            return {};
-                        return result[0];
-                    })
-                    .catch(error => {})
+    async getOneById(id) {
+        try {
+            const result = await this.model.findAll({where:{id}});
+
+            if(result.length <= 0)
+                return {};
+
+            return result[0];
+        }
+        catch(err) {
+            console.error(err);
+            return {};
+        }
     }
 
-    saveOne(modelInstance){
+    async saveOne(instance) {
         //TODO : sa verificam daca modelInstance are campurile potrivite
-        //pentru this.model
-        this.model.create(modelInstance)
-            .catch(error => {})
+        try {
+            await this.model.create(instance);
+        }
+        catch(err) {
+            console.error(err);
+        }
     }
 
-    updateOneById(modifications,id){
-        this.model.update(modifications,{where:{id}});
+    async updateOneById(modifications, id) {
+        //TODO : sa verificam daca modelInstance are campurile potrivite
+        try {
+            await this.model.update(modifications,{where:{id}});
+        }
+        catch(err){
+            console.error(err);
+        }
     }
 
-    deleteOneById(id){
-        this.model.destroy({where:{id}});
+    async deleteOneById(id){
+        try {
+            this.model.destroy({where:{id}});
+        }
+        catch(err){
+            console.error(err);
+        }
     }
 }
 

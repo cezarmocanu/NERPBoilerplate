@@ -1,18 +1,11 @@
 const {Controller} = require('./Controller');
+const {HouseRepository} = require('../repos');
+const {createCRUDHandlers} = require('./ControllerModels');
+
+const crud = createCRUDHandlers(HouseRepository);
 
 const handlers = {
-    get:[
-        {
-            path:'/',
-            handle:(req,res)=>{
-                return res.send('hello from all houses')
-            }
-        },
-       
-    ],
-    post:[],
-    put:[],
-    del:[]
+    ...crud
 }
 
 module.exports = new Controller(handlers).router;

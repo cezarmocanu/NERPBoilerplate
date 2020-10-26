@@ -8,11 +8,14 @@ const UsersController = require('./controllers/UserController');
 const HousesController = require('./controllers/HousesController');
 const Connection = require('./Connection');
 
+//aplicam functii pe req,res
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+//adaugam in routerul app routere mici
 app.use('/users',UsersController);
 app.use('/houses',HousesController);
+
 
 app.listen(port,async ()=>{
     try{
